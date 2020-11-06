@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Stainless AI dev-flow &mdash; dev-flow 1.0.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home" alt="Documentation Home"> dev-flow
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Stainless AI dev-flow</a></li>
+<li><a class="reference internal" href="#goals">Goals</a></li>
+<li><a class="reference internal" href="#team-levels-work-in-progress">Team Levels (work-in-progress)</a><ul>
+<li><a class="reference internal" href="#tl0-no-policy-enforcement">TL0: No policy enforcement.</a></li>
+<li><a class="reference internal" href="#tl1-small-team-policies">TL1: Small team policies</a></li>
+<li><a class="reference internal" href="#tl2-full-team-policies">TL2: Full team policies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#versioning">Versioning</a></li>
+<li><a class="reference internal" href="#meta-build-data">Meta Build Data</a></li>
+<li><a class="reference internal" href="#git-repository-structure">Git Repository Structure</a></li>
+<li><a class="reference internal" href="#branch-and-tag-names">Branch and Tag Names</a></li>
+<li><a class="reference internal" href="#development-stories">Development Stories</a><ul>
+<li><a class="reference internal" href="#creating-an-new-project">Creating an New Project</a></li>
+<li><a class="reference internal" href="#pushing-code">Pushing Code</a></li>
+<li><a class="reference internal" href="#creating-a-new-release">Creating a new Release</a></li>
+<li><a class="reference internal" href="#major-and-minor-releases">MAJOR and MINOR Releases</a></li>
+<li><a class="reference internal" href="#patch-releases">PATCH Releases</a></li>
+<li><a class="reference internal" href="#working-with-feature-branches">Working with Feature Branches</a></li>
+<li><a class="reference internal" href="#hotfixing-releases">Hotfixing Releases</a></li>
+<li><a class="reference internal" href="#build-process-implementation">Build Process Implementation</a></li>
+<li><a class="reference internal" href="#no-developer-git-commits-to-master">No developer git commits to master</a></li>
+<li><a class="reference internal" href="#git-commit-to-develop-including-merges">Git commit to develop (including merges)</a></li>
+<li><a class="reference internal" href="#project-requirements">Project Requirements</a></li>
+<li><a class="reference internal" href="#tag-annotations">Tag Annotations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references">References</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">dev-flow</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Stainless AI dev-flow</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="stainless-ai-dev-flow">
+<h1>Stainless AI dev-flow<a class="headerlink" href="#stainless-ai-dev-flow" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>This specification describes the continuous integration and delivery pipeline for Stainless AI’s projects.
+This proposal builds on existing work done at Stainless in this regard. This pipeline is ideal for small teams.
+The pipeline relies on the following tools/resources:</p>
+<ul class="simple">
+<li><p>Jenkins</p></li>
+<li><p>Semantic Versioning (semver.org)</p></li>
+<li><p>Git</p></li>
+<li><p>GitHub</p></li>
+<li><p>Shared Library <a class="reference external" href="http://github.com/stainlessai/jenkins-semci">http://github.com/stainlessai/jenkins-semci</a></p></li>
+</ul>
+</div>
+<div class="section" id="goals">
+<h1>Goals<a class="headerlink" href="#goals" title="Permalink to this headline">¶</a></h1>
+<p>The pipeline should achieve the following goals:</p>
+<ul class="simple">
+<li><p>Automate repetitive build tasks wherever possible.</p></li>
+<li><p>Enforce versioning standards using tools.</p></li>
+<li><p>Minimize the number of manual steps taken for any given operation:</p></li>
+<li><p>Where it makes sense (for non-code repositories like DEV configuration environments, e.g.), a deployment can be automated</p></li>
+</ul>
+<p>by a simple commit to a repository.
+* To release code, a single Jenkins job should be run
+* To promote code, a single Jenkins job should be run, etc.
+* Support different “team levels,” i.e., optimize for a single developer, a small team, and larger teams, by requiring
+differing levels of enforcement of lockdowns.
+* Write as little custom logic as possible to support this scheme, relying mostly on existing software, plugins and tools.</p>
+</div>
+<div class="section" id="team-levels-work-in-progress">
+<h1>Team Levels (work-in-progress)<a class="headerlink" href="#team-levels-work-in-progress" title="Permalink to this headline">¶</a></h1>
+<p>We introduce the concept of “team levels,” or “TL” to indicate levels of enforcement to support different teams in this
+structure. A TL is a code with an associated set of policy requirements intended to optimize the experience of that
+team using this framework. For example, if only a single developer is working on a project, using pull requests and
+locked branches may be more of a hindrance than an advantage (or maybe not, depends) so a project using “TL0” would not
+have any branch enforcement. Note that a single developer may elect to use TL3 policies, it’s up to them.</p>
+<p>On larger teams, the level may change, so each level should be “backward-compatible,” i.e., all levels should share a
+compatible structure. Branches may change between levels (for example a shared “develop” branch may be introduced on
+moving to TL3 from TL2).</p>
+<p>There are 3 team levels defined:</p>
+<p>Team Levels</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Team Level</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>TL0</p></td>
+<td><p>A single-developer project</p></td>
+</tr>
+<tr class="row-odd"><td><p>TL1</p></td>
+<td><p>2-3 developers/collaborators working on a project</p></td>
+</tr>
+<tr class="row-even"><td><p>TL2</p></td>
+<td><p>3 or more developers working on a project</p></td>
+</tr>
+</tbody>
+</table>
+<p>The policy enforcement increases with team level.</p>
+<div class="section" id="tl0-no-policy-enforcement">
+<h2>TL0: No policy enforcement.<a class="headerlink" href="#tl0-no-policy-enforcement" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>No locked branches</p></li>
+<li><p>All remote branches are read-write</p></li>
+<li><p>Pull requests are not required for any operation</p></li>
+<li><p>No required team code reviews</p></li>
+<li><p>No formal approval workflow</p></li>
+<li><p>Optional shared develop branch (or single develop - feature structure)</p></li>
+</ul>
+</div>
+<div class="section" id="tl1-small-team-policies">
+<h2>TL1: Small team policies<a class="headerlink" href="#tl1-small-team-policies" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Master is read-only</p></li>
+<li><p>Developers can push directly to release branches</p></li>
+<li><p>Pull requests are not required for any operation</p></li>
+</ul>
+</div>
+<div class="section" id="tl2-full-team-policies">
+<h2>TL2: Full team policies<a class="headerlink" href="#tl2-full-team-policies" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Master and release branches are read-only</p></li>
+<li><p>Release branches are locked prior to release</p></li>
+<li><p>Any commits that must go into a release branch must be merged by pull request</p></li>
+<li><p>All commits must be merged into shared develop branch prior to moving to any release branch</p></li>
+<li><p>All PRs must be approved</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="versioning">
+<h1>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h1>
+<p>This pipeline uses semantic versioning. Read about it at <a class="reference external" href="https://semver.org">https://semver.org</a>.</p>
+<p>This pipeline uses pre-release semantics based on a -SNAPSHOT build suffix. Note that the word “SNAPSHOT” is arbitrary
+and this could be “alpha” or “candidate” or “rc” also.</p>
+</div>
+<div class="section" id="meta-build-data">
+<h1>Meta Build Data<a class="headerlink" href="#meta-build-data" title="Permalink to this headline">¶</a></h1>
+<p>For tags on the develop or feature branches, we append a build number to the standard semantic versioning scheme as
+build meta. So the full build identifier is: <code class="code docutils literal notranslate"><span class="pre">$MAJOR.$MINOR.$PATCH(-$BRANCH)-$BUILD_NUMBER-SNAPSHOT</span></code> where <code class="code docutils literal notranslate"><span class="pre">BUILD_NUMBER</span></code>
+is an increasing number, probably the Jenkins build number, although this is not strictly the required source of the number.</p>
+<p>The <code class="code docutils literal notranslate"><span class="pre">BUILD_NUMBER</span></code> is the only field that can be automatically bumped by Jenkins.</p>
+<p>The <code class="code docutils literal notranslate"><span class="pre">$BRANCH</span></code> field is only present on feature branches and the develop branch.</p>
+</div>
+<div class="section" id="git-repository-structure">
+<h1>Git Repository Structure<a class="headerlink" href="#git-repository-structure" title="Permalink to this headline">¶</a></h1>
+<p>This pipeline is based on the Gitflow structure.</p>
+<p>To summarize, projects are structured as follows:</p>
+<p>The master branch contains the latest published release (HEAD points to the latest version of the latest deployed release).
+Humans shouldn’t do anything on the master branch, only bots.</p>
+<p>The develop branch contains the latest stable build that will become a future release.
+Artifacts published from develop have a <code class="code docutils literal notranslate"><span class="pre">-SNAPSHOT</span></code> build meta tag.</p>
+<p>The release branches contains all commits that are being staged for a particular release, and patch versions of the release tree moving forward.</p>
+<p>The hotfix branch contains emergency release commits that must be merged to master in-between regular releases.</p>
+<p>Specific features are developed in specific feature branches. Any artifacts deployed directly from feature branches
+must contain the branch name meta, e.g., <code class="code docutils literal notranslate"><span class="pre">myproject-0.2.5-myfeaturebranchname-$BUILD_NUMBER-SNAPSHOT.ext</span></code></p>
+<p>Why develop and release branches?</p>
+<p>There may be commits on develop that you want to deploy 2 patch releases out, or that haven’t been tested or committed
+in error. The release branch is a staging area where commits that are certain to be deployed go prior to the release
+artifact being produced.</p>
+<a class="reference internal image-reference" href="_images/flow.jpg"><img alt="_images/flow.jpg" src="_images/flow.jpg" style="width: 600px;" /></a>
+</div>
+<div class="section" id="branch-and-tag-names">
+<h1>Branch and Tag Names<a class="headerlink" href="#branch-and-tag-names" title="Permalink to this headline">¶</a></h1>
+<p>The following branch names are reserved:</p>
+<ul class="simple">
+<li><p>master</p></li>
+<li><p>develop</p></li>
+<li><p>v(version) ← release branch</p></li>
+<li><p>hotfixes</p></li>
+</ul>
+<p>Any other valid branch name can be used to describe a feature branch.</p>
+<p>Tags must follow the format:</p>
+<p><code class="code docutils literal notranslate"><span class="pre">$PREFIX&#64;$SEMVER</span></code></p>
+<p>Where $PREFIX is a valid (acceptable by Jenkins, build process and source repository) prefix string followed by the at
+sign “&#64;” (omitted if no prefix is supplied), followed by the semantic version string.</p>
+<p>For example, for a single-project repo, valid tags are of the form:</p>
+<p><code class="code docutils literal notranslate"><span class="pre">0.1.2</span></code></p>
+<p><code class="code docutils literal notranslate"><span class="pre">v0.1.2</span></code></p>
+<p>and if multiple projects exist in a single repo, tags may exist of the form:</p>
+<p><code class="code docutils literal notranslate"><span class="pre">project1&#64;0.2.5-00-SNAPSHOT</span></code></p>
+<p><code class="code docutils literal notranslate"><span class="pre">project1&#64;0.2.5-myfeaturebranch-00-SNAPSHOT</span></code></p>
+<p><code class="code docutils literal notranslate"><span class="pre">project2&#64;0.1.1</span></code></p>
+</div>
+<div class="section" id="development-stories">
+<h1>Development Stories<a class="headerlink" href="#development-stories" title="Permalink to this headline">¶</a></h1>
+<p>The following stories outline developer interaction with the process and describe the tasks that should be performed for
+each story. Actual implementation details are provided in a subsequent section.</p>
+<div class="section" id="creating-an-new-project">
+<h2>Creating an New Project<a class="headerlink" href="#creating-an-new-project" title="Permalink to this headline">¶</a></h2>
+<p>A “project” as defined here is anything that maintains its own version history. It could live in its own repository or
+in a subdirectory of another repository. When creating a new project, the starting semantic version of the project is
+<code class="code docutils literal notranslate"><span class="pre">0.0.1</span></code>. If no tags or other versioning data is present, this default should be enforced by the build system.
+The initial branches are master, develop. An initial release can also be created at this time called <code class="code docutils literal notranslate"><span class="pre">v0.0.1</span></code>.</p>
+</div>
+<div class="section" id="pushing-code">
+<h2>Pushing Code<a class="headerlink" href="#pushing-code" title="Permalink to this headline">¶</a></h2>
+<p>Any push to develop should result in a <code class="code docutils literal notranslate"><span class="pre">SNAPSHOT</span></code> artifact being created and pushed to the artifact repository.
+The artifact will have the version <code class="code docutils literal notranslate"><span class="pre">$MAJOR.$LAST_MINOR+1.0</span></code>, the build number and the <code class="code docutils literal notranslate"><span class="pre">SNAPSHOT</span></code> suffix,
+e.g., the first snapshot from the repository will be <code class="code docutils literal notranslate"><span class="pre">0.1.0-1-SNAPSHOT</span></code>.</p>
+</div>
+<div class="section" id="creating-a-new-release">
+<h2>Creating a new Release<a class="headerlink" href="#creating-a-new-release" title="Permalink to this headline">¶</a></h2>
+<p>Releasing a version requires applying a tag to the repository commit that represents the revision you want to release.
+In order for the release artifact to be built, the build system should enforce that the tagged commit is on the master
+branch. If the tagged commit is not on master, the release version may be reserved but not released. It’s the
+developer’s responsibility to appropriately version the release. IOW, if it’s a breaking change, don’t make it a
+patch release, etc.</p>
+</div>
+<div class="section" id="major-and-minor-releases">
+<h2>MAJOR and MINOR Releases<a class="headerlink" href="#major-and-minor-releases" title="Permalink to this headline">¶</a></h2>
+<p>The develop branch should automatically build a SNAPSHOT release having version $MAJOR.$LAST_MINOR+1.0-SNAPSHOT. All
+release branches must end with <code class="code docutils literal notranslate"><span class="pre">.0</span></code>, e.g., <code class="code docutils literal notranslate"><span class="pre">v1.0.0</span></code> or <code class="code docutils literal notranslate"><span class="pre">v1.1.0</span></code>. Patch release versions should be
+computed from the tags in the repository. To bump MAJOR or MINOR, apply the appropriate tag to the commit that
+contains the desired release revision.</p>
+</div>
+<div class="section" id="patch-releases">
+<h2>PATCH Releases<a class="headerlink" href="#patch-releases" title="Permalink to this headline">¶</a></h2>
+<p>To bump patch, apply the appropriate tag to the commit that contains the desired release version. There should be a
+release branch labeled <code class="code docutils literal notranslate"><span class="pre">vMAJOR.MINOR.0</span></code> that tracks only the commits relevant to that MAJOR/MINOR revision.</p>
+</div>
+<div class="section" id="working-with-feature-branches">
+<h2>Working with Feature Branches<a class="headerlink" href="#working-with-feature-branches" title="Permalink to this headline">¶</a></h2>
+<p>It’s a good practice to develop specific features on dedicated branches. Depending on team level, pull requests may
+be required or a simple merge into develop may be sufficient. All features branches should flow
+<code class="code docutils literal notranslate"><span class="pre">featurebranch</span> <span class="pre">→</span> <span class="pre">develop</span> <span class="pre">→</span> <span class="pre">release</span></code></p>
+</div>
+<div class="section" id="hotfixing-releases">
+<h2>Hotfixing Releases<a class="headerlink" href="#hotfixing-releases" title="Permalink to this headline">¶</a></h2>
+<p>Hotfixes are branched off of master, commits are added and then the commits are merged and released as per usual.</p>
+</div>
+<div class="section" id="build-process-implementation">
+<h2>Build Process Implementation<a class="headerlink" href="#build-process-implementation" title="Permalink to this headline">¶</a></h2>
+<p>Each project may implement a build toolchain of its choice. These notes describe a setup based on</p>
+<ul class="simple">
+<li><p>Jenkins as the centralized, coordinating build system</p></li>
+<li><p>Multibranch pipeline projects for automating artifact builds</p></li>
+<li><p>GitHub webhooks for notifications</p></li>
+<li><p>GitHub branches and tags for recording version history information. Jenkins will use the naming conventions described</p></li>
+</ul>
+<p>herein to calculate version labels.</p>
+<ul class="simple">
+<li><p>Each project should have an embedded Jenkinsfile (some repositories may have more than one) that contains the build</p></li>
+</ul>
+<p>pipeline for that project (or subproject). Jenkins must be able to run the project’s toolchain in the build environment.</p>
+</div>
+<div class="section" id="no-developer-git-commits-to-master">
+<h2>No developer git commits to master<a class="headerlink" href="#no-developer-git-commits-to-master" title="Permalink to this headline">¶</a></h2>
+<p>Ideally, the master branch should be locked down so that only a bot account can write to it. You’ll have to manually
+kick off any merges for these operations from Jenkins, where stainlessbot will be allowed to make the changes. All
+releases should come from the release branch only, developers will have to push commits there and then promote the
+release commit in a build job.</p>
+<p>Jenkins is used to automate artifact creation. Jenkins will scan for, or be notified of, events that occur during the
+development cycle and take appropriate action.  These events are detailed below.</p>
+</div>
+<div class="section" id="git-commit-to-develop-including-merges">
+<h2>Git commit to develop (including merges)<a class="headerlink" href="#git-commit-to-develop-including-merges" title="Permalink to this headline">¶</a></h2>
+<p>During regular development, developers will write code and commit to the develop branch, or a feature branch which is
+merged into develop. For each commit pushed, Jenkins will run the build as defined in each project’s Jenkinsfile(s).
+The build process for each project will determine if the build is up-to-date. If the build is up-to-date, the commit
+didn’t contain anything material to the change of the software deliverable (e.g., maybe a doc update or .gitignore file update, etc).</p>
+<p>If the build changed, the build should produce a new artifact and automatically increment the BUILD_NUMBER  of the
+artifact based on the last valid tag in the repository, then deploy that artifact to the configured repository,
+and tag the commit in GitHub with the new version.</p>
+</div>
+<div class="section" id="project-requirements">
+<h2>Project Requirements<a class="headerlink" href="#project-requirements" title="Permalink to this headline">¶</a></h2>
+<p>Projects must adhere to certain requirements in order to support this build process.</p>
+<p>Project build scripts should accept version information from Jenkins. The close release job will set the following environment:</p>
+<p>VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH, VERSION_PRERELEASE, BUILD_NUMBER</p>
+</div>
+<div class="section" id="tag-annotations">
+<h2>Tag Annotations<a class="headerlink" href="#tag-annotations" title="Permalink to this headline">¶</a></h2>
+<p>The annotation will serve as a record of all the changes that are going into a release. The text of the file should be
+human readable and should be written in laypeople’s terms. An average user of the app should be able to understand
+90% of the changelog (occasionally a bug fix or code change will require jargon). Previous examples of this file
+can be found under the releases section of the GitHub repo.</p>
+<p>Example Annotation</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">aws</span><span class="o">-</span><span class="n">cfn</span><span class="o">-</span><span class="n">configuration</span> <span class="n">v1</span><span class="o">.</span><span class="mf">7.0</span>
+   <span class="o">-</span> <span class="n">Add</span> <span class="n">new</span> <span class="s2">&quot;Foo&quot;</span> <span class="n">API</span>
+   <span class="o">-</span> <span class="n">Add</span> <span class="n">new</span> <span class="s2">&quot;Bar&quot;</span> <span class="n">section</span> <span class="n">to</span> <span class="n">left</span> <span class="n">of</span> <span class="n">Calendar</span>
+      <span class="o">-</span> <span class="n">Add</span> <span class="n">new</span> <span class="s2">&quot;Bar List&quot;</span> <span class="n">panel</span>
+   <span class="o">-</span> <span class="n">Add</span> <span class="n">new</span> <span class="s2">&quot;Bar&quot;</span> <span class="n">popup</span>
+   <span class="o">-</span> <span class="n">Redesign</span> <span class="s2">&quot;Status&quot;</span> <span class="n">screen</span>
+   <span class="o">-</span> <span class="n">Minor</span> <span class="n">changes</span> <span class="ow">and</span> <span class="n">bugfixes</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">Change</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">number</span> <span class="nb">property</span> <span class="ow">in</span> <span class="n">Event</span> <span class="n">API</span>
+      <span class="o">-</span> <span class="n">Correct</span> <span class="n">typo</span> <span class="ow">in</span> <span class="n">Logger</span> <span class="n">GET</span> <span class="n">API</span>
+   <span class="o">-</span> <span class="n">Fix</span> <span class="n">bug</span> <span class="n">that</span> <span class="n">prevented</span> <span class="n">Settings</span> <span class="n">screen</span> <span class="kn">from</span> <span class="nn">loading</span>
+   <span class="o">-</span> <span class="n">Issues</span><span class="p">:</span> <span class="n">HS</span><span class="o">-</span><span class="mi">3</span> <span class="n">HS</span><span class="o">-</span><span class="mi">23</span> <span class="n">HS</span><span class="o">-</span><span class="mi">345</span> <span class="n">HS</span><span class="o">-</span><span class="mi">555</span>
+      <span class="n">HS</span><span class="o">-</span><span class="mi">434</span> <span class="n">HS</span><span class="o">-</span><span class="mi">445</span> <span class="n">HS</span><span class="o">-</span><span class="mi">554</span> <span class="n">HS</span><span class="o">-</span><span class="mi">123</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="references">
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://guides.github.com/introduction/flow/">https://guides.github.com/introduction/flow/</a></p>
+<p><a class="reference external" href="https://www.semver.org/">https://www.semver.org/</a></p>
+<p><a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model">https://nvie.com/posts/a-successful-git-branching-model</a></p>
+<p><a class="reference external" href="https://dev-cafe.github.io/branching-model/">https://dev-cafe.github.io/branching-model/</a></p>
+<p><a class="reference external" href="https://jenkins.io/blog/2018/05/16/pipelines-with-git-tags/">https://jenkins.io/blog/2018/05/16/pipelines-with-git-tags/</a></p>
+<p><a class="reference external" href="https://stackoverflow.com/questions/49448029/multiple-jenkinsfile-in-one-repository">https://stackoverflow.com/questions/49448029/multiple-jenkinsfile-in-one-repository</a></p>
+<p><a class="reference external" href="https://itnext.io/using-git-hooks-to-enforce-branch-naming-policy-ffd81fa01e5e">https://itnext.io/using-git-hooks-to-enforce-branch-naming-policy-ffd81fa01e5e</a></p>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Stainless AI, Inc.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
