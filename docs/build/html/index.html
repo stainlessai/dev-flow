@@ -103,8 +103,10 @@
 <li><a class="reference internal" href="#working-with-feature-branches">Working with Feature Branches</a></li>
 <li><a class="reference internal" href="#hotfixing-releases">Hotfixing Releases</a></li>
 <li><a class="reference internal" href="#build-process-implementation">Build Process Implementation</a></li>
-<li><a class="reference internal" href="#no-developer-git-commits-to-master">No developer git commits to master</a></li>
 <li><a class="reference internal" href="#git-commit-to-develop-including-merges">Git commit to develop (including merges)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#automatically-increment-version-numbers">Automatically Increment Version Numbers</a><ul>
 <li><a class="reference internal" href="#project-requirements">Project Requirements</a></li>
 <li><a class="reference internal" href="#tag-annotations">Tag Annotations</a></li>
 </ul>
@@ -310,7 +312,7 @@ artifact being produced.</p>
 <ul class="simple">
 <li><p>master</p></li>
 <li><p>develop</p></li>
-<li><p>v(version) ← release branch</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">v$MAJOR.$MINOR.x</span></code> ← release branch, e.g., <code class="code docutils literal notranslate"><span class="pre">v0.1.x</span></code> (contains patches only)</p></li>
 <li><p>hotfixes</p></li>
 </ul>
 <p>Any other valid branch name can be used to describe a feature branch.</p>
@@ -361,7 +363,12 @@ contains the desired release revision.</p>
 <div class="section" id="patch-releases">
 <h2>PATCH Releases<a class="headerlink" href="#patch-releases" title="Permalink to this headline">¶</a></h2>
 <p>To bump patch, apply the appropriate tag to the commit that contains the desired release version. There should be a
-release branch labeled <code class="code docutils literal notranslate"><span class="pre">vMAJOR.MINOR.0</span></code> that tracks only the commits relevant to that MAJOR/MINOR revision.</p>
+release branch labeled <code class="code docutils literal notranslate"><span class="pre">vMAJOR.MINOR.0</span></code> that tracks only the commits relevant to that MAJOR/MINOR revision. Builds
+on a release branch should automatically increment the patch version from the last tagged version. For example,
+if the <code class="code docutils literal notranslate"><span class="pre">v1.1.0</span></code> tag exists in the repository, any build on a release branch should have the semantic version
+<code class="code docutils literal notranslate"><span class="pre">v1.1.2-$BUILD_NUM-SNAPSHOT</span></code>. The SNAPSHOT tag should only be removed when a <code class="code docutils literal notranslate"><span class="pre">v1.1.2</span></code> tag is applied to
+the repository, and at that point, all future builds on the release branch will have the semantic version <code class="code docutils literal notranslate"><span class="pre">v1.1.3-SNAPSHOT</span></code>.
+To actually release the patch version, apply the appropriate tag, merge into master and build.</p>
 </div>
 <div class="section" id="working-with-feature-branches">
 <h2>Working with Feature Branches<a class="headerlink" href="#working-with-feature-branches" title="Permalink to this headline">¶</a></h2>
@@ -387,9 +394,6 @@ be required or a simple merge into develop may be sufficient. All features branc
 <li><p>Each project should have an embedded Jenkinsfile (some repositories may have more than one) that contains the build</p></li>
 </ul>
 <p>pipeline for that project (or subproject). Jenkins must be able to run the project’s toolchain in the build environment.</p>
-</div>
-<div class="section" id="no-developer-git-commits-to-master">
-<h2>No developer git commits to master<a class="headerlink" href="#no-developer-git-commits-to-master" title="Permalink to this headline">¶</a></h2>
 <p>Ideally, the master branch should be locked down so that only a bot account can write to it. You’ll have to manually
 kick off any merges for these operations from Jenkins, where stainlessbot will be allowed to make the changes. All
 releases should come from the release branch only, developers will have to push commits there and then promote the
@@ -407,6 +411,15 @@ didn’t contain anything material to the change of the software deliverable (e.
 artifact based on the last valid tag in the repository, then deploy that artifact to the configured repository,
 and tag the commit in GitHub with the new version.</p>
 </div>
+</div>
+<div class="section" id="automatically-increment-version-numbers">
+<h1>Automatically Increment Version Numbers<a class="headerlink" href="#automatically-increment-version-numbers" title="Permalink to this headline">¶</a></h1>
+<p>This can cause confusion among developers, it should be discussed.</p>
+<p>Building off any branch except master in Jenkins will result in an automatically incremented version number
+(based on the last version tag), not just a new build number. If you’re expecting <code class="code docutils literal notranslate"><span class="pre">1.1.1</span></code> in a feature build then you
+should continue working off of <code class="code docutils literal notranslate"><span class="pre">1.1.0</span></code> until ready to tag. Tagging as <code class="code docutils literal notranslate"><span class="pre">1.1.1</span></code> and then building your feature branch will
+result in <code class="code docutils literal notranslate"><span class="pre">1.1.2</span></code> builds. Once development is complete, add the patch version tag and then merge to master to release
+the desired version.</p>
 <div class="section" id="project-requirements">
 <h2>Project Requirements<a class="headerlink" href="#project-requirements" title="Permalink to this headline">¶</a></h2>
 <p>Projects must adhere to certain requirements in order to support this build process.</p>

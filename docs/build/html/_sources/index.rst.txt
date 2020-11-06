@@ -144,7 +144,7 @@ The following branch names are reserved:
 
 * develop
 
-* v(version) ← release branch
+* :code:`v$MAJOR.$MINOR.x` ← release branch, e.g., :code:`v0.1.x` (contains patches only)
 
 * hotfixes
 
@@ -208,7 +208,12 @@ contains the desired release revision.
 PATCH Releases
 **************
 To bump patch, apply the appropriate tag to the commit that contains the desired release version. There should be a
-release branch labeled :code:`vMAJOR.MINOR.0` that tracks only the commits relevant to that MAJOR/MINOR revision.
+release branch labeled :code:`vMAJOR.MINOR.0` that tracks only the commits relevant to that MAJOR/MINOR revision. Builds
+on a release branch should automatically increment the patch version from the last tagged version. For example,
+if the :code:`v1.1.0` tag exists in the repository, any build on a release branch should have the semantic version
+:code:`v1.1.2-$BUILD_NUM-SNAPSHOT`. The SNAPSHOT tag should only be removed when a :code:`v1.1.2` tag is applied to
+the repository, and at that point, all future builds on the release branch will have the semantic version :code:`v1.1.3-SNAPSHOT`.
+To actually release the patch version, apply the appropriate tag, merge into master and build.
 
 Working with Feature Branches
 *****************************
@@ -239,9 +244,6 @@ herein to calculate version labels.
 * Each project should have an embedded Jenkinsfile (some repositories may have more than one) that contains the build
 pipeline for that project (or subproject). Jenkins must be able to run the project’s toolchain in the build environment.
 
-No developer git commits to master
-**********************************
-
 Ideally, the master branch should be locked down so that only a bot account can write to it. You’ll have to manually
 kick off any merges for these operations from Jenkins, where stainlessbot will be allowed to make the changes. All
 releases should come from the release branch only, developers will have to push commits there and then promote the
@@ -260,6 +262,17 @@ didn’t contain anything material to the change of the software deliverable (e.
 If the build changed, the build should produce a new artifact and automatically increment the BUILD_NUMBER  of the
 artifact based on the last valid tag in the repository, then deploy that artifact to the configured repository,
 and tag the commit in GitHub with the new version.
+
+Automatically Increment Version Numbers
+=======================================
+
+This can cause confusion among developers, it should be discussed.
+
+Building off any branch except master in Jenkins will result in an automatically incremented version number
+(based on the last version tag), not just a new build number. If you’re expecting :code:`1.1.1` in a feature build then you
+should continue working off of :code:`1.1.0` until ready to tag. Tagging as :code:`1.1.1` and then building your feature branch will
+result in :code:`1.1.2` builds. Once development is complete, add the patch version tag and then merge to master to release
+the desired version.
 
 Project Requirements
 ********************
